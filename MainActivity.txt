@@ -47,7 +47,6 @@ public class MainActivity extends Activity {
     private static final String FRP_ORIGIN_PATH = "/dev/block/by-name/frp";
     private static final String FRP_FIXING_FILE = "frp.bin";
     private static final String FRP_FIXING_PATH = "/sdcard/"+ FRP_FIXING_FILE;
-    private static final String FRP_FIXING_DATA= "/sdcard/tmp.bin";
     private static final String FRP_FIXING_TEMP = "tmp.bin";
     private static final String SHRINKER = "shrinker";
     private static final String SHRINKER_SUCCESS = "Permissive";
@@ -252,8 +251,8 @@ public class MainActivity extends Activity {
 
                 try {
                     File file = new File(Environment.getExternalStorageDirectory(), FRP_FIXING_FILE);
-                    DataInputStream dataInStream = new DataInputStream(new BufferedInputStream(new FileInputStream(new File(Environment.getExternalStorageDirectory(), FRP_FIXING_FILE))));
-                    DataOutputStream dataOutStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File(Environment.getExternalStorageDirectory(), FRP_FIXING_TEMP))));
+                    DataInputStream dataInStream = new DataInputStream(new BufferedInputStream(new FileInputStream(new File(Environment.getExternalStorageDirectory(), FRP_FIXING_TEMP))));
+                    DataOutputStream dataOutStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File(Environment.getExternalStorageDirectory(), FRP_FIXING_FILE))));
 
                     int[] tmpHex = new int[(int) file.length()];
                     int i = 0;
@@ -282,7 +281,7 @@ public class MainActivity extends Activity {
 
                     addText("- 通知：" + FRP_FIXING_FILE + " の修正が完了しました。");
                     addText("- 通知：" + FRP_FIXING_FILE + " を " + FRP_ORIGIN_PATH + " に上書きしています。");
-                    mDchaService.copyUpdateImage(FRP_FIXING_DATA, DCHA_SYSTEM_COPY + FRP_ORIGIN_PATH);
+                    mDchaService.copyUpdateImage(FRP_FIXING_PATH, DCHA_SYSTEM_COPY + FRP_ORIGIN_PATH);
 
                     openSettings();
                 } catch (Exception e) {
