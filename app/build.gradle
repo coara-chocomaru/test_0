@@ -3,22 +3,21 @@ plugins {
 }
 
 android {
-    compileSdk 35
+    compileSdkVersion 33
     namespace 'com.test'
 
     defaultConfig {
         applicationId "com.test"
-        minSdk 24
-        targetSdk 33
+        minSdkVersion 24
+        targetSdkVersion 33
         versionCode 1
         versionName "0.1"
     }
-    
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
-}
 
     signingConfigs {
         release {
