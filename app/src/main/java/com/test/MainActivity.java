@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+    
         final TextView statusTextView = findViewById(R.id.statusTextView);
         final ScrollView scrollView = findViewById(R.id.scrollView);
 
@@ -96,9 +97,11 @@ public class MainActivity extends Activity {
 
             String line;
             while ((line = reader.readLine()) != null) {
+                
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                
                         statusTextView.append(line + "\n");
                         scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                     }
