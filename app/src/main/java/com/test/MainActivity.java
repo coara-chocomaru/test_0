@@ -62,9 +62,10 @@ public class MainActivity extends Activity {
     }
 
     private void startExecution() {
-        
+    
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
+    
         executor.submit(() -> executeCommand(1000000));
         executor.submit(() -> executeCommandForLs(500000));
     }
@@ -99,6 +100,7 @@ public class MainActivity extends Activity {
         executeShellCommand(commandBuilder.toString());
     }
 
+
     private void executeShellCommand(String command) {
         try {
             Process process = Runtime.getRuntime().exec(command);
@@ -107,13 +109,16 @@ public class MainActivity extends Activity {
             String line;
             while ((line = reader.readLine()) != null) {
                 
-                runOnUiThread(() -> {
-                    statusTextView.append(line + "\n");
-                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);  
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        statusTextView.append(line + "\n");
+                        scrollView.fullScroll(ScrollView.FOCUS_DOWN);  
+                    }
                 });
             }
 
-        
+            /
             logToFile("Executed command: " + command);
         } catch (IOException e) {
             e.printStackTrace();
@@ -140,7 +145,6 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
     }
-
 
     private String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
