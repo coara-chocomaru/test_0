@@ -31,11 +31,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        
         final TextView statusTextView = findViewById(R.id.statusTextView);
         final ScrollView scrollView = findViewById(R.id.scrollView);
 
-    
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
@@ -51,7 +49,6 @@ public class MainActivity extends Activity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Storage permission granted", Toast.LENGTH_SHORT).show();
-                
                 final TextView statusTextView = findViewById(R.id.statusTextView);
                 final ScrollView scrollView = findViewById(R.id.scrollView);
                 startExecution(statusTextView, scrollView);
@@ -99,7 +96,6 @@ public class MainActivity extends Activity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-        
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
