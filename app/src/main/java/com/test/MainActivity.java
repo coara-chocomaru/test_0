@@ -26,16 +26,18 @@ public class MainActivity extends Activity {
     private static final int REQUEST_STORAGE_PERMISSION = 1;
     private static final String LOG_DIR = Environment.getExternalStorageDirectory().getPath() + "/TestLogs/";
 
-    private TextView statusTextView;
-    private ScrollView scrollView;
+    private final TextView statusTextView; // final に変更
+    private final ScrollView scrollView;   // final に変更
+
+    public MainActivity() {
+        statusTextView = findViewById(R.id.statusTextView);
+        scrollView = findViewById(R.id.scrollView);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        statusTextView = findViewById(R.id.statusTextView);
-        scrollView = findViewById(R.id.scrollView);
 
         // ストレージの権限を確認
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -97,14 +99,11 @@ public class MainActivity extends Activity {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             String line;
-            final TextView finalStatusTextView = statusTextView; // finalにする
             while ((line = reader.readLine()) != null) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        finalStatusTextView.append(line + "\n");
-                        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                    }
+                // statusTextView を最初から final として宣言したため、ラムダ式内で使用可能
+                runOnUiThread(() -> {
+                    statusTextView.append(line + "\n");
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                 });
             }
 
