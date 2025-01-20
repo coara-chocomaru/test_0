@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         statusTextView = findViewById(R.id.statusTextView);
         scrollView = findViewById(R.id.scrollView);
 
-        
+    
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
@@ -62,10 +62,10 @@ public class MainActivity extends Activity {
     }
 
     private void startExecution() {
-    
+        
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-    
+
         executor.submit(() -> executeCommand(1000000));
         executor.submit(() -> executeCommandForLs(500000));
     }
@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
     
         commandBuilder.append("id\"");
 
-    
+        
         executeShellCommand(commandBuilder.toString());
     }
 
@@ -96,10 +96,9 @@ public class MainActivity extends Activity {
 
         commandBuilder.append("ls\"");
 
-    
+        
         executeShellCommand(commandBuilder.toString());
     }
-
 
     private void executeShellCommand(String command) {
         try {
@@ -108,7 +107,7 @@ public class MainActivity extends Activity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                
+        
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -118,7 +117,7 @@ public class MainActivity extends Activity {
                 });
             }
 
-            /
+        
             logToFile("Executed command: " + command);
         } catch (IOException e) {
             e.printStackTrace();
@@ -145,6 +144,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
     }
+
 
     private String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
