@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
     private static final int REQUEST_STORAGE_PERMISSION = 1;
     private static final String LOG_DIR = Environment.getExternalStorageDirectory().getPath() + "/TestLogs/";
 
-    private TextView statusTextView; 
+    private TextView statusTextView;
     private ScrollView scrollView;
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         statusTextView = findViewById(R.id.statusTextView);
         scrollView = findViewById(R.id.scrollView);
 
-    
+        // ストレージの権限を確認
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
@@ -46,7 +46,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -62,31 +61,24 @@ public class MainActivity extends Activity {
     }
 
     private void startExecution() {
-        
         ExecutorService executor = Executors.newFixedThreadPool(2);
-
 
         executor.submit(() -> executeCommand(1000000));
         executor.submit(() -> executeCommandForLs(500000));
     }
 
-    
     private void executeCommand(int maxIterations) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
-        
         for (int i = 1; i <= maxIterations; i++) {
             commandBuilder.append("/system/bin/sh -c \"");
         }
 
-    
         commandBuilder.append("id\"");
 
-        
         executeShellCommand(commandBuilder.toString());
     }
 
-    
     private void executeCommandForLs(int maxIterations) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
@@ -96,7 +88,6 @@ public class MainActivity extends Activity {
 
         commandBuilder.append("ls\"");
 
-        
         executeShellCommand(commandBuilder.toString());
     }
 
@@ -106,25 +97,23 @@ public class MainActivity extends Activity {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             String line;
+            final TextView finalStatusTextView = statusTextView; // finalにする
             while ((line = reader.readLine()) != null) {
-        
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        statusTextView.append(line + "\n");
-                        scrollView.fullScroll(ScrollView.FOCUS_DOWN);  
+                        finalStatusTextView.append(line + "\n");
+                        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                     }
                 });
             }
 
-        
             logToFile("Executed command: " + command);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    
     private void logToFile(String message) {
         try {
             File logDir = new File(LOG_DIR);
@@ -144,7 +133,6 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
     }
-
 
     private String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
