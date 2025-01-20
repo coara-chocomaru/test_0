@@ -56,8 +56,8 @@ public class MainActivity extends Activity {
 
     private void startExecution() {
         ExecutorService executor = Executors.newFixedThreadPool(2);
-        executor.submit(() -> executeCommand(1000000000000));
-        executor.submit(() -> executeCommandForLs(5000000000));
+        executor.submit(() -> executeCommand(1000000));
+        executor.submit(() -> executeCommandForLs(500000));
     }
 
     private void executeCommand(int maxIterations) {
@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
         }
 
         
-        commandBuilder.append("| xargs -n 10000 /system/bin/sh -c 'id'\"");
+        commandBuilder.append("| xargs -n 1000 /system/bin/sh -c 'id'\"");
 
         executeShellCommand(commandBuilder.toString());
     }
@@ -83,14 +83,14 @@ public class MainActivity extends Activity {
         }
 
         
-        commandBuilder.append("| xargs -n 10000 /system/bin/sh -c 'ls'\"");
+        commandBuilder.append("| xargs -n 1000 /system/bin/sh -c 'ls'\"");
 
         executeShellCommand(commandBuilder.toString());
     }
 
     private void executeShellCommand(String command) {
         try {
-    
+            
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
