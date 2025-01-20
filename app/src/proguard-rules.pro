@@ -2,7 +2,7 @@
 -keep interface android.** { *; }
 -dontwarn java.lang.**
 -dontusemixedcaseclassnames
--keep class com.coara.grepmd5app.MainActivity {
+-keep class com.test.MainActivity {
     public static void main(java.lang.String[]);
 }
 
