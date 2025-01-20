@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:label="ExecSecurityTest"
+        android:label="ExecTest"
         android:theme="@android:style/Theme.Light.NoTitleBar">
         
     
