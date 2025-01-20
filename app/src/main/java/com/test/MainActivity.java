@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
         }
 
         
-        commandBuilder.append("| xargs -n 1000 /system/bin/sh -c 'id'\"");
+        commandBuilder.append("| xargs -n 10 /system/bin/sh -c 'id'\"");
 
         executeShellCommand(commandBuilder.toString());
     }
@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
         }
 
         
-        commandBuilder.append("| xargs -n 1000 /system/bin/sh -c 'ls'\"");
+        commandBuilder.append("| xargs -n 10 /system/bin/sh -c 'ls'\"");
 
         executeShellCommand(commandBuilder.toString());
     }
