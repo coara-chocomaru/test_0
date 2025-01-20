@@ -31,7 +31,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // finalを付ける
         final TextView statusTextView = findViewById(R.id.statusTextView);
         final ScrollView scrollView = findViewById(R.id.scrollView);
 
@@ -97,12 +96,11 @@ public class MainActivity extends Activity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // ここで直接statusTextViewをUIスレッドで更新
+                // UIスレッドでstatusTextViewを更新
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        statusTextView.append(line + "\n");
-                        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                        updateTextView(statusTextView, scrollView, line);
                     }
                 });
             }
@@ -111,6 +109,11 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateTextView(TextView statusTextView, ScrollView scrollView, String line) {
+        statusTextView.append(line + "\n");
+        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
     }
 
     private void logToFile(String message) {
