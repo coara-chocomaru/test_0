@@ -90,10 +90,12 @@ public class MainActivity extends Activity {
 
     private void executeShellCommand(String command) {
         try {
+    
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             String line;
+            
             while ((line = reader.readLine()) != null) {
                 logToFile("Output: " + line);
             }
@@ -109,11 +111,11 @@ public class MainActivity extends Activity {
         try {
             File logDir = new File(LOG_DIR);
             if (!logDir.exists()) {
-                logDir.mkdirs();
+                logDir.mkdirs(); 
             }
             File logFile = new File(logDir, getCurrentDateTime() + ".txt");
             if (!logFile.exists()) {
-                logFile.createNewFile();
+                logFile.createNewFile(); 
             }
 
             FileWriter writer = new FileWriter(logFile, true);
