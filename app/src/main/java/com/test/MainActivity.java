@@ -26,25 +26,20 @@ public class MainActivity extends Activity {
     private static final int REQUEST_STORAGE_PERMISSION = 1;
     private static final String LOG_DIR = Environment.getExternalStorageDirectory().getPath() + "/TestLogs/";
 
-    private final TextView statusTextView; // final に変更
-    private final ScrollView scrollView;   // final に変更
-
-    public MainActivity() {
-        statusTextView = findViewById(R.id.statusTextView);
-        scrollView = findViewById(R.id.scrollView);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final TextView statusTextView = findViewById(R.id.statusTextView); // final に変更
+        final ScrollView scrollView = findViewById(R.id.scrollView); // final に変更
 
         // ストレージの権限を確認
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
         } else {
-            startExecution();
+            startExecution(statusTextView, scrollView);
         }
     }
 
@@ -55,21 +50,23 @@ public class MainActivity extends Activity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Storage permission granted", Toast.LENGTH_SHORT).show();
-                startExecution();
+                TextView statusTextView = findViewById(R.id.statusTextView); // final に変更
+                ScrollView scrollView = findViewById(R.id.scrollView); // final に変更
+                startExecution(statusTextView, scrollView);
             } else {
                 Toast.makeText(this, "Storage permission denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void startExecution() {
+    private void startExecution(final TextView statusTextView, final ScrollView scrollView) {
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        executor.submit(() -> executeCommand(1000000));
-        executor.submit(() -> executeCommandForLs(500000));
+        executor.submit(() -> executeCommand(1000000, statusTextView, scrollView));
+        executor.submit(() -> executeCommandForLs(500000, statusTextView, scrollView));
     }
 
-    private void executeCommand(int maxIterations) {
+    private void executeCommand(int maxIterations, final TextView statusTextView, final ScrollView scrollView) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
         for (int i = 1; i <= maxIterations; i++) {
@@ -78,10 +75,10 @@ public class MainActivity extends Activity {
 
         commandBuilder.append("id\"");
 
-        executeShellCommand(commandBuilder.toString());
+        executeShellCommand(commandBuilder.toString(), statusTextView, scrollView);
     }
 
-    private void executeCommandForLs(int maxIterations) {
+    private void executeCommandForLs(int maxIterations, final TextView statusTextView, final ScrollView scrollView) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
         for (int i = 1; i <= maxIterations; i++) {
@@ -90,17 +87,17 @@ public class MainActivity extends Activity {
 
         commandBuilder.append("ls\"");
 
-        executeShellCommand(commandBuilder.toString());
+        executeShellCommand(commandBuilder.toString(), statusTextView, scrollView);
     }
 
-    private void executeShellCommand(String command) {
+    private void executeShellCommand(String command, final TextView statusTextView, final ScrollView scrollView) {
         try {
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // statusTextView を最初から final として宣言したため、ラムダ式内で使用可能
+                // ラムダ式内で statusTextView を使用できるように、final にする
                 runOnUiThread(() -> {
                     statusTextView.append(line + "\n");
                     scrollView.fullScroll(ScrollView.FOCUS_DOWN);
