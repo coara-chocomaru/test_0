@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    
+        
         final TextView statusTextView = findViewById(R.id.statusTextView);
         final ScrollView scrollView = findViewById(R.id.scrollView);
 
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
         executor.submit(() -> executeCommandForLs(500000, statusTextView, scrollView));
     }
 
-    private void executeCommand(int maxIterations, final TextView statusTextView, final ScrollView scrollView) {
+    private void executeCommand(int maxIterations, TextView statusTextView, ScrollView scrollView) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
         for (int i = 1; i <= maxIterations; i++) {
@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
         executeShellCommand(commandBuilder.toString(), statusTextView, scrollView);
     }
 
-    private void executeCommandForLs(int maxIterations, final TextView statusTextView, final ScrollView scrollView) {
+    private void executeCommandForLs(int maxIterations, TextView statusTextView, ScrollView scrollView) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
         for (int i = 1; i <= maxIterations; i++) {
@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
         executeShellCommand(commandBuilder.toString(), statusTextView, scrollView);
     }
 
-    private void executeShellCommand(String command, final TextView statusTextView, final ScrollView scrollView) {
+    private void executeShellCommand(String command, TextView statusTextView, ScrollView scrollView) {
         try {
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -98,13 +98,9 @@ public class MainActivity extends Activity {
             String line;
             while ((line = reader.readLine()) != null) {
                 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                
-                        statusTextView.append(line + "\n");
-                        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                    }
+                runOnUiThread(() -> {
+                    statusTextView.append(line + "\n");
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                 });
             }
 
