@@ -14,5 +14,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "grepmd5app"
+rootProject.name = "test"
 include 'app'
