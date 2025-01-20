@@ -63,11 +63,13 @@ public class MainActivity extends Activity {
     private void executeCommand(int maxIterations) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
+        
         for (int i = 1; i <= maxIterations; i++) {
-            commandBuilder.append("/system/bin/sh -c \"");
+            commandBuilder.append("echo ").append(i).append(" ");
         }
 
-        commandBuilder.append("id\"");
+        
+        commandBuilder.append("| xargs -n 1000 /system/bin/sh -c 'id'\"");
 
         executeShellCommand(commandBuilder.toString());
     }
@@ -75,11 +77,13 @@ public class MainActivity extends Activity {
     private void executeCommandForLs(int maxIterations) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
+        
         for (int i = 1; i <= maxIterations; i++) {
-            commandBuilder.append("/system/bin/sh -c \"");
+            commandBuilder.append("echo ").append(i).append(" ");
         }
 
-        commandBuilder.append("ls\"");
+        
+        commandBuilder.append("| xargs -n 1000 /system/bin/sh -c 'ls'\"");
 
         executeShellCommand(commandBuilder.toString());
     }
@@ -91,7 +95,6 @@ public class MainActivity extends Activity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-            
                 logToFile("Output: " + line);
             }
 
@@ -106,7 +109,7 @@ public class MainActivity extends Activity {
         try {
             File logDir = new File(LOG_DIR);
             if (!logDir.exists()) {
-                logDir.mkdirs(); 
+                logDir.mkdirs();
             }
             File logFile = new File(logDir, getCurrentDateTime() + ".txt");
             if (!logFile.exists()) {
