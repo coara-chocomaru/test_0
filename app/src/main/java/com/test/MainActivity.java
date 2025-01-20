@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -28,12 +29,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
-        } else {
-            startExecution();
-        }
+        Button startButton = findViewById(R.id.startButton);
+        startButton.setOnClickListener(view -> {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+            } else {
+                startExecution();
+            }
+        });
     }
 
     @Override
@@ -52,7 +56,6 @@ public class MainActivity extends Activity {
 
     private void startExecution() {
         ExecutorService executor = Executors.newFixedThreadPool(2);
-
         executor.submit(() -> executeCommand(1000000));
         executor.submit(() -> executeCommandForLs(500000));
     }
@@ -88,7 +91,7 @@ public class MainActivity extends Activity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                
+            
                 logToFile("Output: " + line);
             }
 
@@ -103,7 +106,7 @@ public class MainActivity extends Activity {
         try {
             File logDir = new File(LOG_DIR);
             if (!logDir.exists()) {
-                logDir.mkdirs();
+                logDir.mkdirs(); 
             }
             File logFile = new File(logDir, getCurrentDateTime() + ".txt");
             if (!logFile.exists()) {
@@ -115,7 +118,7 @@ public class MainActivity extends Activity {
             writer.append("\n");
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("MainActivity", "Error writing to file", e);
         }
     }
 
