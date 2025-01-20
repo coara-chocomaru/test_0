@@ -9,14 +9,11 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ScrollView;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.app.AlertDialog;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
@@ -40,7 +37,7 @@ public class MainActivity extends Activity {
         statusTextView = findViewById(R.id.statusTextView);
         scrollView = findViewById(R.id.scrollView);
 
-        
+    
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
@@ -48,7 +45,6 @@ public class MainActivity extends Activity {
             startExecution();
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -65,43 +61,61 @@ public class MainActivity extends Activity {
     }
 
     private void startExecution() {
+    
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
+
+        executor.submit(() -> executeCommand(1000000));
+        executor.submit(() -> executeCommandForLs(500000));
+    }
+
+
+    private void executeCommand(int maxIterations) {
+        StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
+
     
-        executor.submit(() -> executeCommand("sh -c 'for i in {1..1000000}; do echo $i; done; id'", 1000000));
-        executor.submit(() -> executeCommand("sh -c 'for i in {1..500000}; do echo $i; done; ls'", 500000));
+        for (int i = 1; i <= maxIterations; i++) {
+            commandBuilder.append("/system/bin/sh -c \"");
+        }
+
+    
+        commandBuilder.append("id\"");
+
+
+        executeShellCommand(commandBuilder.toString());
     }
 
     
-    private void executeCommand(String command, int stopAt) {
+    private void executeCommandForLs(int maxIterations) {
+        StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
+
+        for (int i = 1; i <= maxIterations; i++) {
+            commandBuilder.append("/system/bin/sh -c \"");
+        }
+
+        commandBuilder.append("ls\"");
+
+        
+        executeShellCommand(commandBuilder.toString());
+    }
+
+    
+    private void executeShellCommand(String command) {
         try {
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             String line;
-            int count = 0;
             while ((line = reader.readLine()) != null) {
-    
+                
                 runOnUiThread(() -> {
                     statusTextView.append(line + "\n");
-                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);  
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);  // スクロールを最下部に
                 });
-                count++;
-
-                if (count == stopAt) {
-            
-                    Process finalProcess = Runtime.getRuntime().exec("id");
-                    BufferedReader finalReader = new BufferedReader(new InputStreamReader(finalProcess.getInputStream()));
-                    while ((line = finalReader.readLine()) != null) {
-                        runOnUiThread(() -> {
-                            statusTextView.append(line + "\n");
-                            scrollView.fullScroll(ScrollView.FOCUS_DOWN);  
-                        });
-                    }
-                    logToFile("ID Command executed after " + stopAt + " iterations.");
-                    break;
-                }
             }
+
+        
+            logToFile("Executed command: " + command);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,19 +146,5 @@ public class MainActivity extends Activity {
     private String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
         return sdf.format(new Date());
-    }
-
-    
-    private void requestPermissionDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Permission Required")
-                .setMessage("This app requires storage permission to save logs.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
-                    }
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
     }
 }
