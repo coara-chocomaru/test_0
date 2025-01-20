@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 public class MainActivity extends Activity {
 
     private static final int REQUEST_STORAGE_PERMISSION = 1;
-    private static final String LOG_DIR = Environment.getExternalStorageDirectory().getPath() + "/TestLogs/";
+    private static final String LOG_DIR = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getPath() + "/TestLogs/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +88,13 @@ public class MainActivity extends Activity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // 結果をログに保存
+                
                 logToFile("Output: " + line);
             }
 
             logToFile("Executed command: " + command);
         } catch (IOException e) {
+            logToFile("Error executing command: " + e.getMessage());
             e.printStackTrace();
         }
     }
