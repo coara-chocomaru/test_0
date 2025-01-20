@@ -31,8 +31,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView statusTextView = findViewById(R.id.statusTextView); // final に変更
-        final ScrollView scrollView = findViewById(R.id.scrollView); // final に変更
+        // ここで final を使って定義
+        final TextView statusTextView = findViewById(R.id.statusTextView);
+        final ScrollView scrollView = findViewById(R.id.scrollView);
 
         // ストレージの権限を確認
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -50,8 +51,9 @@ public class MainActivity extends Activity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Storage permission granted", Toast.LENGTH_SHORT).show();
-                TextView statusTextView = findViewById(R.id.statusTextView); // final に変更
-                ScrollView scrollView = findViewById(R.id.scrollView); // final に変更
+                // 再度 final 変数を使って実行
+                final TextView statusTextView = findViewById(R.id.statusTextView);
+                final ScrollView scrollView = findViewById(R.id.scrollView);
                 startExecution(statusTextView, scrollView);
             } else {
                 Toast.makeText(this, "Storage permission denied", Toast.LENGTH_SHORT).show();
@@ -97,7 +99,7 @@ public class MainActivity extends Activity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // ラムダ式内で statusTextView を使用できるように、final にする
+                // ラムダ式内で statusTextView を使用するため、final にする
                 runOnUiThread(() -> {
                     statusTextView.append(line + "\n");
                     scrollView.fullScroll(ScrollView.FOCUS_DOWN);
