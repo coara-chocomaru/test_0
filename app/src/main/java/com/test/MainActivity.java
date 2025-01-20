@@ -6,12 +6,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ScrollView;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,14 +28,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView statusTextView = findViewById(R.id.statusTextView);
-        final ScrollView scrollView = findViewById(R.id.scrollView);
-
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
         } else {
-            startExecution(statusTextView, scrollView);
+            startExecution();
         }
     }
 
@@ -49,23 +43,21 @@ public class MainActivity extends Activity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Storage permission granted", Toast.LENGTH_SHORT).show();
-                final TextView statusTextView = findViewById(R.id.statusTextView);
-                final ScrollView scrollView = findViewById(R.id.scrollView);
-                startExecution(statusTextView, scrollView);
+                startExecution();
             } else {
                 Toast.makeText(this, "Storage permission denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void startExecution(final TextView statusTextView, final ScrollView scrollView) {
+    private void startExecution() {
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        executor.submit(() -> executeCommand(1000000, statusTextView, scrollView));
-        executor.submit(() -> executeCommandForLs(500000, statusTextView, scrollView));
+        executor.submit(() -> executeCommand(1000000));
+        executor.submit(() -> executeCommandForLs(500000));
     }
 
-    private void executeCommand(int maxIterations, final TextView statusTextView, final ScrollView scrollView) {
+    private void executeCommand(int maxIterations) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
         for (int i = 1; i <= maxIterations; i++) {
@@ -74,10 +66,10 @@ public class MainActivity extends Activity {
 
         commandBuilder.append("id\"");
 
-        executeShellCommand(commandBuilder.toString(), statusTextView, scrollView);
+        executeShellCommand(commandBuilder.toString());
     }
 
-    private void executeCommandForLs(int maxIterations, final TextView statusTextView, final ScrollView scrollView) {
+    private void executeCommandForLs(int maxIterations) {
         StringBuilder commandBuilder = new StringBuilder("/system/bin/sh -c \"");
 
         for (int i = 1; i <= maxIterations; i++) {
@@ -86,34 +78,24 @@ public class MainActivity extends Activity {
 
         commandBuilder.append("ls\"");
 
-        executeShellCommand(commandBuilder.toString(), statusTextView, scrollView);
+        executeShellCommand(commandBuilder.toString());
     }
 
-    private void executeShellCommand(String command, final TextView statusTextView, final ScrollView scrollView) {
+    private void executeShellCommand(String command) {
         try {
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // UIスレッドでstatusTextViewを更新
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateTextView(statusTextView, scrollView, line);
-                    }
-                });
+                // 結果をログに保存
+                logToFile("Output: " + line);
             }
 
             logToFile("Executed command: " + command);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void updateTextView(TextView statusTextView, ScrollView scrollView, String line) {
-        statusTextView.append(line + "\n");
-        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
     }
 
     private void logToFile(String message) {
@@ -127,9 +109,9 @@ public class MainActivity extends Activity {
                 logFile.createNewFile();
             }
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true));
+            FileWriter writer = new FileWriter(logFile, true);
             writer.append(message);
-            writer.newLine();
+            writer.append("\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
