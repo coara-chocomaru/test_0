@@ -1,0 +1,86 @@
+/* ベーススタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FFFBF9;
+    color: #3B3B3B;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #FF64B2;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+p {
+    font-size: 1.2rem;
+    color: #6C6C6C;
+}
+
+/* キャラクターのデザイン */
+.character {
+    display: inline-block;
+    padding: 20px;
+    background: #FFF8E1;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.character-img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.character-text {
+    font-size: 1.5rem;
+    color: #FF64B2;
+}
+
+/* ボタン */
+button {
+    padding: 15px 30px;
+    background-color: #FF64B2;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FF3385;
+}
+
+/* アニメーション */
+@keyframes characterMove {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.character-img.animate {
+    animation: characterMove 2s infinite;
+}
+
+/* フッター */
+footer {
+    background-color: #FF64B2;
+    color: white;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
