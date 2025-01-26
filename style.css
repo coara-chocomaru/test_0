@@ -45,10 +45,11 @@ h1 {
     top: 30px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 40px; /* ハートの絵文字のサイズを調整 */
+    font-size: 40px; /* 絵文字の大きさ */
     animation: heartbeat 1.5s infinite;
     visibility: hidden; /* 初期状態で非表示 */
-    display: inline-block; /* inline-blockにして絵文字が表示されるように調整 */
+    display: inline-block; /* 絵文字を正しく表示 */
+    font-family: 'Arial', sans-serif; /* 絵文字が確実に表示されるように指定 */
 }
 
 button {
