@@ -112,6 +112,20 @@
                 top: 35px;
             }
         }
+
+        /* アニメーション追加 */
+        .animate {
+            animation: spin 3s infinite linear;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -141,6 +155,7 @@
         const characterText = document.getElementById("characterText");
         const cryingImage = document.getElementById("cryingImage");
         const animationButton = document.getElementById("animationButton");
+        const characterImage = document.querySelector(".character-img");
         let isSpinning = false;
         let spinCount = 0;
 
@@ -163,11 +178,11 @@
                 spinCount++;
                 cryingImage.style.visibility = "hidden"; // 涙を非表示
                 characterText.textContent = "くるくる回ってるよ〜！";
-                document.querySelector('.character-img').style.animation = 'bounce 1s infinite';
+                characterImage.classList.add("animate");  // 回転アニメーションを追加
 
                 // 10秒後に停止
                 setTimeout(() => {
-                    document.querySelector('.character-img').style.animation = 'none';
+                    characterImage.classList.remove("animate");  // 回転アニメーションを削除
                     characterText.textContent = "終わったよ！";
                     isSpinning = false;
 
