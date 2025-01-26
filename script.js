@@ -1,5 +1,5 @@
 const characterText = document.getElementById("characterText");
-const cryingImage = document.getElementById("cryingImage");
+const heartEffect = document.getElementById("heartEffect");
 const animationButton = document.getElementById("animationButton");
 const characterImage = document.querySelector(".character-img");
 let isSpinning = false;
@@ -22,7 +22,7 @@ animationButton.addEventListener("click", function() {
     if (!isSpinning) {
         isSpinning = true;
         spinCount++;
-        cryingImage.style.visibility = "hidden"; // 涙を非表示
+        heartEffect.style.visibility = "hidden"; // ハートを非表示
         characterText.textContent = "くるくる回ってるよ〜！";
         characterImage.classList.add("animate");  // 回転アニメーションを追加
 
@@ -32,7 +32,7 @@ animationButton.addEventListener("click", function() {
             isSpinning = false;
 
             if (spinCount > 3) {
-                cryingImage.style.visibility = "visible";
+                heartEffect.style.visibility = "visible"; // ハートエフェクトを表示
                 characterText.textContent = "くるくる〜〜";
             }
         }, 3000);
