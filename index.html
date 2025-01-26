@@ -135,9 +135,9 @@
 
     <div class="main-content">
         <div class="character">
-            <img src="character.png" alt="かわいいキャラ" class="character-img">
+            <img src="character.png" alt="キャラ" class="character-img">
             <p id="characterText" class="character-text">こんにちは！</p>
-            <img src="crying.png" alt="涙" class="crying" id="cryingImage">
+            <img src="crying.png" alt="1" class="crying" id="cryingImage">
         </div>
 
         <button id="animationButton">〜〜〜〜くるくる〜〜〜〜</button>
@@ -185,12 +185,12 @@
                     characterText.textContent = "終わったよ！";
                     isSpinning = false;
 
-                    // 何回も回したら涙を表示
+            
                     if (spinCount > 3) {
                         cryingImage.style.visibility = "visible";
-                        characterText.textContent = "あれ…何回も回っちゃった…";
+                        characterText.textContent = "くるくる〜〜";
                     }
-                }, 5000);
+                }, 3000);
             }
         });
 
