@@ -55,8 +55,10 @@
             top: 30px;
             left: 50%;
             transform: translateX(-50%);
-            animation: crying 2s infinite;
+            font-size: 30px;
+            animation: heart-beat 1s infinite;
             visibility: hidden;
+            color: #ff69b4;
         }
 
         button {
@@ -103,12 +105,12 @@
             }
         }
 
-        @keyframes crying {
+        @keyframes heart-beat {
             0%, 100% {
-                top: 30px;
+                transform: translateX(-50%) scale(1);
             }
             50% {
-                top: 35px;
+                transform: translateX(-50%) scale(1.5);
             }
         }
 
@@ -137,7 +139,7 @@
         <div class="character">
             <img src="character.png" alt="キャラ" class="character-img">
             <p id="characterText" class="character-text">こんにちは！</p>
-            <img src="crying.png" alt="1" class="crying" id="cryingImage">
+            <span class="crying" id="cryingImage">❤️</span> <!-- ハートエフェクト -->
         </div>
 
         <button id="animationButton">〜〜〜〜くるくる〜〜〜〜</button>
@@ -179,15 +181,13 @@
                 characterText.textContent = "くるくる回ってるよ〜！";
                 characterImage.classList.add("animate");  // 回転アニメーションを追加
 
-    
                 setTimeout(() => {
                     characterImage.classList.remove("animate");  // 回転アニメーションを削除
                     characterText.textContent = "終わったよ！";
                     isSpinning = false;
 
-            
                     if (spinCount > 3) {
-                        cryingImage.style.visibility = "visible";
+                        cryingImage.style.visibility = "visible"; // ハートエフェクトを表示
                         characterText.textContent = "くるくる〜〜";
                     }
                 }, 3000);
