@@ -45,12 +45,10 @@ h1 {
     top: 30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: #ff69b4;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    font-size: 40px; /* ハートの絵文字のサイズを調整 */
     animation: heartbeat 1.5s infinite;
-    visibility: hidden;
+    visibility: hidden; /* 初期状態で非表示 */
+    display: inline-block; /* inline-blockにして絵文字が表示されるように調整 */
 }
 
 button {
