@@ -114,7 +114,7 @@
 
         /* 回転アニメーション */
         .animate {
-            animation: spin 3s infinite linear;
+            animation: spin 1.5s infinite linear;
         }
 
         @keyframes spin {
@@ -179,7 +179,7 @@
                 characterText.textContent = "くるくる回ってるよ〜！";
                 characterImage.classList.add("animate");  // 回転アニメーションを追加
 
-                // 10秒後に停止
+    
                 setTimeout(() => {
                     characterImage.classList.remove("animate");  // 回転アニメーションを削除
                     characterText.textContent = "終わったよ！";
@@ -190,7 +190,7 @@
                         cryingImage.style.visibility = "visible";
                         characterText.textContent = "あれ…何回も回っちゃった…";
                     }
-                }, 10000);
+                }, 5000);
             }
         });
 
