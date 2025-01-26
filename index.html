@@ -34,6 +34,7 @@
         .character {
             display: inline-block;
             margin-top: 20px;
+            position: relative;
         }
 
         .character-img {
@@ -41,12 +42,22 @@
             height: auto;
             border-radius: 50%;
             animation: bounce 1s infinite;
+            transition: transform 0.3s;
         }
 
         .character-text {
             font-size: 1.5em;
             margin-top: 10px;
             color: #ff69b4;
+        }
+
+        .crying {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: crying 2s infinite;
+            visibility: hidden;
         }
 
         button {
@@ -92,6 +103,15 @@
                 transform: translateY(-10px);
             }
         }
+
+        @keyframes crying {
+            0%, 100% {
+                top: 30px;
+            }
+            50% {
+                top: 35px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -103,7 +123,8 @@
     <div class="main-content">
         <div class="character">
             <img src="character.png" alt="かわいいキャラ" class="character-img">
-            <p class="character-text">こんにちは！</p>
+            <p id="characterText" class="character-text">こんにちは！</p>
+            <img src="crying.png" alt="涙" class="crying" id="cryingImage">
         </div>
 
         <button id="animationButton">〜〜〜〜くるくる〜〜〜〜</button>
@@ -115,5 +136,52 @@
             <a href="https://x.com/coara_choco" target="_blank">Xのアカウント</a>
         </div>
     </footer>
+
+    <script>
+        const characterText = document.getElementById("characterText");
+        const cryingImage = document.getElementById("cryingImage");
+        const animationButton = document.getElementById("animationButton");
+        let isSpinning = false;
+        let spinCount = 0;
+
+        // 時間帯ごとにセリフを変更
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            if (hour < 12) {
+                characterText.textContent = "おはよう！";
+            } else if (hour < 18) {
+                characterText.textContent = "こんにちは！";
+            } else {
+                characterText.textContent = "こんばんは！";
+            }
+        }
+
+        // ボタンがクリックされた時の処理
+        animationButton.addEventListener("click", function() {
+            if (!isSpinning) {
+                isSpinning = true;
+                spinCount++;
+                cryingImage.style.visibility = "hidden"; // 涙を非表示
+                characterText.textContent = "くるくる回ってるよ〜！";
+                document.querySelector('.character-img').style.animation = 'bounce 1s infinite';
+
+                // 10秒後に停止
+                setTimeout(() => {
+                    document.querySelector('.character-img').style.animation = 'none';
+                    characterText.textContent = "終わったよ！";
+                    isSpinning = false;
+
+                    // 何回も回したら涙を表示
+                    if (spinCount > 3) {
+                        cryingImage.style.visibility = "visible";
+                        characterText.textContent = "あれ…何回も回っちゃった…";
+                    }
+                }, 10000);
+            }
+        });
+
+        // 初回読み込み時に時間帯ごとのセリフを表示
+        updateGreeting();
+    </script>
 </body>
 </html>
