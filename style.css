@@ -40,12 +40,16 @@ h1 {
     color: #ff69b4;
 }
 
-.crying {
+.heart {
     position: absolute;
     top: 30px;
     left: 50%;
     transform: translateX(-50%);
-    animation: crying 2s infinite;
+    width: 40px;
+    height: 40px;
+    background-color: #ff69b4;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    animation: heartbeat 1.5s infinite;
     visibility: hidden;
 }
 
@@ -84,21 +88,12 @@ footer {
     text-decoration: underline;
 }
 
-@keyframes bounce {
+@keyframes heartbeat {
     0%, 100% {
-        transform: translateY(0);
+        transform: scale(1);
     }
     50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes crying {
-    0%, 100% {
-        top: 30px;
-    }
-    50% {
-        top: 35px;
+        transform: scale(1.2);
     }
 }
 
