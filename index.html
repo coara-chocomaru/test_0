@@ -4,42 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>マイワールド</title>
-    
-    <!-- セキュリティ強化のためのContent Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
-        script-src 'self';  <!-- スクリプトを自ドメインと指定 -->
-        style-src 'self';  <!-- スタイルシートは自ドメインのみ -->
-        img-src 'self';  <!-- 画像の取得元を制限（自ドメインのみ） -->
-        font-src 'self';  <!-- フォントの取得元制限 -->
-        connect-src 'self';  <!-- 接続の制限 -->
-        object-src 'none';  <!-- オブジェクトのロード禁止 -->
-        upgrade-insecure-requests;  <!-- HTTPからHTTPSへの強制リダイレクト -->
+        script-src 'self'; 
+        style-src 'self'; 
+        img-src 'self'; 
+        font-src 'self'; 
+        connect-src 'self'; 
+        object-src 'none'; 
+        upgrade-insecure-requests; 
     ">
-
-    <!-- サイトのセキュリティ強化 -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
-
+    <title>マイワールド</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 
     <style>
         /* 右クリック禁止 */
         body {
-            -webkit-user-select: none; /* すべてのブラウザで選択無効 */
+            -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
         }
 
-        /* 画像ドラッグ無効 */
         .character-img {
-            pointer-events: none; /* 画像クリック・ドラッグを無効 */
+            pointer-events: none;
         }
 
-        /* 透明な画像を重ねる */
         .character {
             position: relative;
         }
@@ -51,8 +44,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(255, 255, 255, 0.5); /* 半透明のオーバーレイ */
-            pointer-events: none; /* 画像クリックを防ぐ */
+            background-color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
         }
     </style>
 </head>
@@ -64,13 +57,10 @@
 
     <div class="main-content">
         <div class="character">
-            <!-- 同じディレクトリにある画像を読み込む -->
             <img src="character.png" alt="キャラ" class="character-img">
             <p id="characterText" class="character-text">こんにちは！</p>
-            <!-- 絵文字ハート -->
             <span id="heartEffect" class="heart">💖</span>
         </div>
-
         <button id="animationButton">〜〜〜〜くるくる〜〜〜〜</button>
     </div>
 
@@ -84,13 +74,45 @@
     <script>
         // 右クリック禁止
         document.addEventListener('contextmenu', function(event) {
-            event.preventDefault(); // 右クリックメニューを無効にする
+            event.preventDefault();
         });
 
         // 画像ドラッグ無効
         document.querySelector('.character-img').addEventListener('dragstart', function(event) {
-            event.preventDefault(); // 画像をドラッグできないようにする
+            event.preventDefault();
         });
+
+        // デベロッパーツール対策
+        (function() {
+            var devtools = /./;
+            devtools.toString = function() {
+                window.location.href = 'https://www.google.com'; // もし開いたらgoogleに飛ばす
+            };
+            console.log(devtools);
+        })();
+
+        // XSS監視: URLやパラメータに不正な文字列が含まれていないかチェック
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const checkXSS = () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                for (let param of urlParams) {
+                    const value = param[1];
+                    if (/</.test(value) || />/.test(value) || /script/.test(value)) {
+                        window.location.href = 'https://www.google.com'; // 不正な文字列を検出した場合
+                    }
+                }
+            };
+            checkXSS();
+        });
+
+        // 外部ドメイン監視
+        const originalOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, url) {
+            if (url && !url.startsWith(window.location.origin)) {
+                window.location.href = 'https://www.google.com'; // 外部ドメインにアクセスしようとした場合
+            }
+            originalOpen.apply(this, arguments);
+        };
     </script>
 </body>
 </html>
