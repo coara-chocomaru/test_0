@@ -5,56 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>マイワールド</title>
-
-    <!-- ダミーリンクと無意味な関数 -->
-    <script>
-        var x1 = "cWmZlM09wZXkgT0FGWU5WS0V5WQ=="; // 暗号化された文字列（Base64）
-        function decodeX1(str) { 
-            return atob(str); // Base64復号化
-        }
-        console.log(decodeX1(x1)); // ログ出力（意味なし）
-
-        function dummyProcess() {
-            var dummyVar = 123;
-            dummyVar = dummyVar * 3 + 2 - 7; // 無意味な計算
-            return dummyVar;
-        }
-        console.log(dummyProcess()); // 無意味なログ
-    </script>
-
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-
-    <!-- ダミースタイルと非表示設定 -->
-    <style>
-        .dummyStyle { display: none; }
-        html, body {
-            height: 100%;
-            margin: 0;
-            background-color: #f0f0f0; /* ダミー背景色 */
-        }
-
-        .hiddenEffect { visibility: hidden; } /* ダミー効果（無意味） */
-        iframe { display: none; }
-    </style>
 </head>
 <body>
-
     <header>
-        <h1 id="m1w0rLd3">ようこそ！</h1>
-        <p class="randomCls">私の適当なページです！</p>
+        <h1>ようこそ！</h1>
+        <p>私の適当なページです！</p>
     </header>
 
     <div class="main-content">
         <div class="character">
             <img src="https://x.gd/VDc6M" alt="キャラ" class="character-img">
             <p id="characterText" class="character-text">こんにちは！</p>
-
-            <!-- 絵文字ハート（無意味なspan） -->
-            <span id="heartEffect" class="heart hiddenEffect">💖</span>
+            <!-- 絵文字ハート -->
+            <span id="heartEffect" class="heart">💖</span>
         </div>
 
-        <button id="animationButton" class="dummyStyle">〜〜〜〜くるくる〜〜〜〜</button>
+        <button id="animationButton">〜〜〜〜くるくる〜〜〜〜</button>
     </div>
 
     <footer>
@@ -63,12 +31,5 @@
             <a href="https://x.com/coara_choco" target="_blank">Xのアカウント</a>
         </div>
     </footer>
-
-    <!-- 暗号化された文字列復号処理 -->
-    <script>
-        var decodedTitle = decodeX1(x1); // 復号化
-        document.title = decodedTitle; // タイトル設定
-    </script>
-
 </body>
 </html>
