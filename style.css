@@ -1,3 +1,4 @@
+/* 難読化されたCSS */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f9f6f7;
@@ -7,52 +8,52 @@ body {
     text-align: center;
 }
 
-header {
+._header {
     background-color: #ffb6c1;
     padding: 20px 0;
 }
 
-h1 {
+._title {
     font-size: 3em;
     color: #ff69b4;
 }
 
-.main-content {
+._main {
     margin: 20px;
 }
 
-.character {
+._character {
     display: inline-block;
     margin-top: 20px;
     position: relative;
 }
 
-.character-img {
+._img {
     width: 150px;
     height: auto;
     border-radius: 50%;
     transition: transform 0.3s;
 }
 
-.character-text {
+._text {
     font-size: 1.5em;
     margin-top: 10px;
     color: #ff69b4;
 }
 
-.heart {
+._heart {
     position: absolute;
     top: 30px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 40px; /* 絵文字の大きさ */
-    animation: heartbeat 1.5s infinite;
-    visibility: hidden; /* 初期状態で非表示 */
-    display: inline-block; /* 絵文字を正しく表示 */
-    font-family: 'Arial', sans-serif; /* 絵文字が確実に表示されるように指定 */
+    font-size: 40px;
+    animation: _heartbeat 1.5s infinite;
+    visibility: hidden;
+    display: inline-block;
+    font-family: 'Arial', sans-serif;
 }
 
-button {
+._btn {
     background-color: #ff69b4;
     color: white;
     padding: 10px 20px;
@@ -63,11 +64,11 @@ button {
     transition: transform 0.3s ease;
 }
 
-button:hover {
+._btn:hover {
     transform: scale(1.1);
 }
 
-footer {
+._footer {
     background-color: #ffb6c1;
     padding: 10px;
     position: fixed;
@@ -76,35 +77,27 @@ footer {
     text-align: center;
 }
 
-.footer-links a {
+._links a {
     color: #ff69b4;
     text-decoration: none;
     margin: 0 10px;
     font-size: 1.2em;
 }
 
-.footer-links a:hover {
+._links a:hover {
     text-decoration: underline;
 }
 
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
+@keyframes _heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 
-.animate {
-    animation: spin 1.5s infinite linear;
+._spin {
+    animation: _rotate 1.5s infinite linear;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+@keyframes _rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
