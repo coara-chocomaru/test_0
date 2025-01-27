@@ -22,111 +22,53 @@
         console.log(dummyProcess()); // 無意味なログ
     </script>
 
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    <!-- ダミースタイルと非表示設定 -->
     <style>
-        /* 難読化されたCSS変数名 */
-        ._0xabc1 { font-family: 'Arial', sans-serif; background-color: #f9f6f7; color: #333; margin: 0; padding: 0; text-align: center; }
-        ._0x1234 { background-color: #ffb6c1; padding: 20px 0; }
-        ._0x5678 { font-size: 3em; color: #ff69b4; }
-        ._0x4321 { margin: 20px; }
-        ._0x8765 { display: inline-block; margin-top: 20px; position: relative; }
-        ._0x1357 { width: 150px; height: auto; border-radius: 50%; transition: transform 0.3s; }
-        ._0x2468 { font-size: 1.5em; margin-top: 10px; color: #ff69b4; }
-        ._0x1122 { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); font-size: 40px; animation: _0x9999 1.5s infinite; visibility: hidden; display: inline-block; font-family: 'Arial', sans-serif; }
-        ._0x3344 { background-color: #ff69b4; color: white; padding: 10px 20px; font-size: 1.2em; border: none; border-radius: 30px; cursor: pointer; transition: transform 0.3s ease; }
-        ._0x5566:hover { transform: scale(1.1); }
-        ._0x7788 { background-color: #ffb6c1; padding: 10px; position: fixed; width: 100%; bottom: 0; text-align: center; }
-        ._0x9900 { color: #ff69b4; text-decoration: none; margin: 0 10px; font-size: 1.2em; }
-        ._0x1111:hover { text-decoration: underline; }
-        @keyframes _0x9999 { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-        ._0x2222 { animation: _0x3333 1.5s infinite linear; }
-        @keyframes _0x3333 { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* ダミー処理 */
-        ._0x4444 { font-size: 12px; visibility: hidden; }
-        ._0x5555 { position: absolute; top: 0; left: 0; z-index: -1; }
-        ._0x6666 { background-color: rgba(0, 0, 0, 0.5); width: 100%; height: 100%; }
-
-        /* 無意味なスタイルの追加（ダミー処理） */
-        ._0x7777 { margin-left: 9999px; }
-        ._0x8888 { display: none; }
-        ._0x9999 { border: 0; padding: 0; }
-    </style>
-
-    <script defer>
-        const characterText = document.getElementById("characterText");
-        const heartEffect = document.getElementById("heartEffect");
-        const animationButton = document.getElementById("animationButton");
-        const characterImage = document.querySelector(".character-img");
-        let isSpinning = false;
-        let spinCount = 0;
-
-        // 時間帯ごとにセリフを変更
-        function updateGreeting() {
-            const hour = new Date().getHours();
-            if (hour < 12) {
-                characterText.textContent = "おはよう！";
-            } else if (hour < 18) {
-                characterText.textContent = "こんにちは！";
-            } else {
-                characterText.textContent = "こんばんは！";
-            }
+        .dummyStyle { display: none; }
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #f0f0f0; /* ダミー背景色 */
         }
 
-        // ボタンがクリックされた時の処理
-        animationButton.addEventListener("click", function() {
-            if (!isSpinning) {
-                isSpinning = true;
-                spinCount++;
-                heartEffect.style.visibility = "hidden"; // ハートを非表示
-                characterText.textContent = "くるくる回ってるよ〜！";
-                characterImage.classList.add("animate");  // 回転アニメーションを追加
+        .hiddenEffect { visibility: hidden; } /* ダミー効果（無意味） */
+        iframe { display: none; }
+    </style>
+</head>
+<body>
 
-                setTimeout(() => {
-                    characterImage.classList.remove("animate");  // 回転アニメーションを削除
-                    characterText.textContent = "終わったよ！";
-                    isSpinning = false;
+    <header>
+        <h1 id="m1w0rLd3">ようこそ！</h1>
+        <p class="randomCls">私の適当なページです！</p>
+    </header>
 
-                    if (spinCount > 3) {
-                        heartEffect.style.visibility = "visible"; // ハートエフェクトを表示
-                        characterText.textContent = "くるくる〜〜";
-                    }
-                }, 3000);
-            }
-        });
+    <div class="main-content">
+        <div class="character">
+            <img src="https://x.gd/VDc6M" alt="キャラ" class="character-img">
+            <p id="characterText" class="character-text">こんにちは！</p>
 
-        // 初回読み込み時に時間帯ごとのセリフを表示
-        updateGreeting();
+            <!-- 絵文字ハート（無意味なspan） -->
+            <span id="heartEffect" class="heart hiddenEffect">💖</span>
+        </div>
 
-        // 暗号化された文字列復号処理
+        <button id="animationButton" class="dummyStyle">〜〜〜〜くるくる〜〜〜〜</button>
+    </div>
+
+    <footer>
+        <p>© 2025 マイワールド All rights reserved.</p>
+        <div class="footer-links">
+            <a href="https://x.com/coara_choco" target="_blank">Xのアカウント</a>
+        </div>
+    </footer>
+
+    <!-- 暗号化された文字列復号処理 -->
+    <script>
         var decodedTitle = decodeX1(x1); // 復号化
         document.title = decodedTitle; // タイトル設定
     </script>
-</head>
-<body class="_0xabc1">
-
-    <header class="_0x1234">
-        <h1 id="m1w0rLd3" class="_0x5678">ようこそ！</h1>
-        <p class="randomCls _0x4321">私の適当なページです！</p>
-    </header>
-
-    <div class="main-content _0x4321">
-        <div class="character _0x8765">
-            <img src="https://x.gd/VDc6M" alt="キャラ" class="character-img _0x1357">
-            <p id="characterText" class="character-text _0x2468">こんにちは！</p>
-
-            <!-- 絵文字ハート（無意味なspan） -->
-            <span id="heartEffect" class="heart _0x1122">💖</span>
-        </div>
-
-        <button id="animationButton" class="dummyStyle _0x3344">〜〜〜〜くるくる〜〜〜〜</button>
-    </div>
-
-    <footer class="_0x7788">
-        <p>© 2025 マイワールド All rights reserved.</p>
-        <div class="footer-links">
-            <a href="https://x.com/coara_choco" target="_blank" class="_0x9900">Xのアカウント</a>
-        </div>
-    </footer>
 
 </body>
 </html>
