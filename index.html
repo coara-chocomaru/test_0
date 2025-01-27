@@ -24,6 +24,37 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+
+    <style>
+        /* 右クリック禁止 */
+        body {
+            -webkit-user-select: none; /* すべてのブラウザで選択無効 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* 画像ドラッグ無効 */
+        .character-img {
+            pointer-events: none; /* 画像クリック・ドラッグを無効 */
+        }
+
+        /* 透明な画像を重ねる */
+        .character {
+            position: relative;
+        }
+
+        .character-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.5); /* 半透明のオーバーレイ */
+            pointer-events: none; /* 画像クリックを防ぐ */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -49,5 +80,17 @@
             <a href="https://x.com/coara_choco" target="_blank" rel="noopener noreferrer">Xのアカウント</a>
         </div>
     </footer>
+
+    <script>
+        // 右クリック禁止
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // 右クリックメニューを無効にする
+        });
+
+        // 画像ドラッグ無効
+        document.querySelector('.character-img').addEventListener('dragstart', function(event) {
+            event.preventDefault(); // 画像をドラッグできないようにする
+        });
+    </script>
 </body>
 </html>
