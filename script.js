@@ -1,43 +1,45 @@
-const characterText = document.getElementById("characterText");
-const heartEffect = document.getElementById("heartEffect");
-const animationButton = document.getElementById("animationButton");
-const characterImage = document.querySelector(".character-img");
-let isSpinning = false;
-let spinCount = 0;
+(function() {
+    const _0x1a2b3c = document.getElementById("characterText");
+    const _0x4d5e6f = document.getElementById("heartEffect");
+    const _0x7f8a9b = document.getElementById("animationButton");
+    const _0x0d0e0f = document.querySelector(".character-img");
+    let _0xaaaa = false;
+    let _0xbbbb = 0;
 
-// 時間帯ごとにセリフを変更
-function updateGreeting() {
-    const hour = new Date().getHours();
-    if (hour < 12) {
-        characterText.textContent = "おはよう！";
-    } else if (hour < 18) {
-        characterText.textContent = "こんにちは！";
-    } else {
-        characterText.textContent = "こんばんは！";
+    // 時間帯ごとにセリフを変更
+    function _0x12ab34() {
+        const _0xcdeff = new Date().getHours();
+        if (_0xcdeff < 12) {
+            _0x1a2b3c.textContent = "おはよう！";
+        } else if (_0xcdeff < 18) {
+            _0x1a2b3c.textContent = "こんにちは！";
+        } else {
+            _0x1a2b3c.textContent = "こんばんは！";
+        }
     }
-}
 
-// ボタンがクリックされた時の処理
-animationButton.addEventListener("click", function() {
-    if (!isSpinning) {
-        isSpinning = true;
-        spinCount++;
-        heartEffect.style.visibility = "hidden"; // ハートを非表示
-        characterText.textContent = "くるくる回ってるよ〜！";
-        characterImage.classList.add("animate");  // 回転アニメーションを追加
+    // ボタンがクリックされた時の処理
+    _0x7f8a9b.addEventListener("click", function() {
+        if (!_0xaaaa) {
+            _0xaaaa = true;
+            _0xbbbb++;
+            _0x4d5e6f.style.visibility = "hidden"; // ハートを非表示
+            _0x1a2b3c.textContent = "くるくる回ってるよ〜！";
+            _0x0d0e0f.classList.add("animate");  // 回転アニメーションを追加
 
-        setTimeout(() => {
-            characterImage.classList.remove("animate");  // 回転アニメーションを削除
-            characterText.textContent = "終わったよ！";
-            isSpinning = false;
+            setTimeout(() => {
+                _0x0d0e0f.classList.remove("animate");  // 回転アニメーションを削除
+                _0x1a2b3c.textContent = "終わったよ！";
+                _0xaaaa = false;
 
-            if (spinCount > 3) {
-                heartEffect.style.visibility = "visible"; // ハートエフェクトを表示
-                characterText.textContent = "くるくる〜〜";
-            }
-        }, 3000);
-    }
-});
+                if (_0xbbbb > 3) {
+                    _0x4d5e6f.style.visibility = "visible"; // ハートエフェクトを表示
+                    _0x1a2b3c.textContent = "くるくる〜〜";
+                }
+            }, 3000);
+        }
+    });
 
-// 初回読み込み時に時間帯ごとのセリフを表示
-updateGreeting();
+    // 初回読み込み時に時間帯ごとのセリフを表示
+    _0x12ab34(); 
+})();
