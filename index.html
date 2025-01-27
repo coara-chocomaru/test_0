@@ -32,15 +32,9 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            pointer-events: none; /* body全体のタッチイベントを無効 */
         }
 
-        /* ボタンにだけタッチを有効にする */
-        #animationButton {
-            pointer-events: all; /* ボタンをクリック可能にする */
-        }
-
-        /* 画像のドラッグ無効 */
+        /* 画像ドラッグ無効 */
         .character-img {
             pointer-events: none; /* 画像クリック・ドラッグを無効 */
         }
@@ -60,17 +54,6 @@
             background-color: rgba(255, 255, 255, 0.5); /* 半透明のオーバーレイ */
             pointer-events: none; /* 画像クリックを防ぐ */
         }
-
-        /* 長押し防止のために透明なオーバーレイ */
-        .character-img-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: transparent;
-            pointer-events: none; /* タッチイベントを無効にする */
-        }
     </style>
 </head>
 <body>
@@ -83,8 +66,6 @@
         <div class="character">
             <!-- 同じディレクトリにある画像を読み込む -->
             <img src="character.png" alt="キャラ" class="character-img">
-            <!-- 長押しを防止するための透明なオーバーレイ -->
-            <div class="character-img-overlay"></div>
             <p id="characterText" class="character-text">こんにちは！</p>
             <!-- 絵文字ハート -->
             <span id="heartEffect" class="heart">💖</span>
@@ -109,11 +90,6 @@
         // 画像ドラッグ無効
         document.querySelector('.character-img').addEventListener('dragstart', function(event) {
             event.preventDefault(); // 画像をドラッグできないようにする
-        });
-
-        // スマホの長押し無効
-        document.querySelector('.character-img').addEventListener('touchstart', function(event) {
-            event.preventDefault(); // 長押しイベントを無効にする
         });
     </script>
 </body>
