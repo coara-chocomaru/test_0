@@ -32,9 +32,15 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            pointer-events: none; /* body全体のタッチイベントを無効 */
         }
 
-        /* 画像ドラッグ無効 */
+        /* ボタンにだけタッチを有効にする */
+        #animationButton {
+            pointer-events: all; /* ボタンをクリック可能にする */
+        }
+
+        /* 画像のドラッグ無効 */
         .character-img {
             pointer-events: none; /* 画像クリック・ドラッグを無効 */
         }
@@ -63,7 +69,7 @@
             right: 0;
             bottom: 0;
             background-color: transparent;
-            pointer-events: all; /* タッチイベントを無効にしない */
+            pointer-events: none; /* タッチイベントを無効にする */
         }
     </style>
 </head>
