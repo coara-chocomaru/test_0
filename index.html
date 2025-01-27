@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
         script-src 'self' https://example.com;  <!-- スクリプトを自ドメインと指定 -->
         style-src 'self';  <!-- スタイルシートは自ドメインのみ -->
-        img-src 'self' https://x.gd;  <!-- 画像の取得元を制限 -->
+        img-src 'self';  <!-- 画像の取得元を制限（自ドメインのみ） -->
         font-src 'self';  <!-- フォントの取得元制限 -->
         connect-src 'self';  <!-- 接続の制限 -->
         object-src 'none';  <!-- オブジェクトのロード禁止 -->
@@ -33,7 +33,8 @@
 
     <div class="main-content">
         <div class="character">
-            <img src="https://x.gd/VDc6M" alt="キャラ" class="character-img">
+            <!-- 同じディレクトリにある画像を読み込む -->
+            <img src="Character.png" alt="キャラ" class="character-img">
             <p id="characterText" class="character-text">こんにちは！</p>
             <!-- 絵文字ハート -->
             <span id="heartEffect" class="heart">💖</span>
