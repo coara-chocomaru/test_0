@@ -30,14 +30,28 @@ h1 {
     position: relative;
 }
 
+/* 画像のスタイル */
 .character-img {
     width: 150px;
     height: auto;
     border-radius: 50%;
     transition: transform 0.3s, box-shadow 0.3s;
     object-fit: cover; /* 画像の切り抜きを適切に調整 */
+    position: relative;
 }
 
+/* 透明なオーバーレイを追加 */
+.character-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    pointer-events: all;  /* 画像部分への操作を無効化 */
+}
+
+/* 画像のホバーエフェクト */
 .character-img:hover {
     transform: scale(1.1);  /* 画像が少し大きくなる */
     box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);  /* ふわっと浮かび上がる */
