@@ -1,110 +1,27 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f6f7;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
+/* 難読化されたCSS変数名 */
+._0xabc1 { font-family: 'Arial', sans-serif; background-color: #f9f6f7; color: #333; margin: 0; padding: 0; text-align: center; }
+._0x1234 { background-color: #ffb6c1; padding: 20px 0; }
+._0x5678 { font-size: 3em; color: #ff69b4; }
+._0x4321 { margin: 20px; }
+._0x8765 { display: inline-block; margin-top: 20px; position: relative; }
+._0x1357 { width: 150px; height: auto; border-radius: 50%; transition: transform 0.3s; }
+._0x2468 { font-size: 1.5em; margin-top: 10px; color: #ff69b4; }
+._0x1122 { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); font-size: 40px; animation: _0x9999 1.5s infinite; visibility: hidden; display: inline-block; font-family: 'Arial', sans-serif; }
+._0x3344 { background-color: #ff69b4; color: white; padding: 10px 20px; font-size: 1.2em; border: none; border-radius: 30px; cursor: pointer; transition: transform 0.3s ease; }
+._0x5566:hover { transform: scale(1.1); }
+._0x7788 { background-color: #ffb6c1; padding: 10px; position: fixed; width: 100%; bottom: 0; text-align: center; }
+._0x9900 { color: #ff69b4; text-decoration: none; margin: 0 10px; font-size: 1.2em; }
+._0x1111:hover { text-decoration: underline; }
+@keyframes _0x9999 { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+._0x2222 { animation: _0x3333 1.5s infinite linear; }
+@keyframes _0x3333 { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-header {
-    background-color: #ffb6c1;
-    padding: 20px 0;
-}
+/* ダミー処理 */
+._0x4444 { font-size: 12px; visibility: hidden; }
+._0x5555 { position: absolute; top: 0; left: 0; z-index: -1; }
+._0x6666 { background-color: rgba(0, 0, 0, 0.5); width: 100%; height: 100%; }
 
-h1 {
-    font-size: 3em;
-    color: #ff69b4;
-}
-
-.main-content {
-    margin: 20px;
-}
-
-.character {
-    display: inline-block;
-    margin-top: 20px;
-    position: relative;
-}
-
-.character-img {
-    width: 150px;
-    height: auto;
-    border-radius: 50%;
-    transition: transform 0.3s;
-}
-
-.character-text {
-    font-size: 1.5em;
-    margin-top: 10px;
-    color: #ff69b4;
-}
-
-.heart {
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 40px; /* 絵文字の大きさ */
-    animation: heartbeat 1.5s infinite;
-    visibility: hidden; /* 初期状態で非表示 */
-    display: inline-block; /* 絵文字を正しく表示 */
-    font-family: 'Arial', sans-serif; /* 絵文字が確実に表示されるように指定 */
-}
-
-button {
-    background-color: #ff69b4;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-button:hover {
-    transform: scale(1.1);
-}
-
-footer {
-    background-color: #ffb6c1;
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
-}
-
-.footer-links a {
-    color: #ff69b4;
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 1.2em;
-}
-
-.footer-links a:hover {
-    text-decoration: underline;
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-.animate {
-    animation: spin 1.5s infinite linear;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
+/* 無意味なスタイルの追加（ダミー処理） */
+._0x7777 { margin-left: 9999px; }
+._0x8888 { display: none; }
+._0x9999 { border: 0; padding: 0; }
