@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>マイワールド</title>
+    
+    <!-- セキュリティ強化のためのContent Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+        script-src 'self' https://example.com;  <!-- スクリプトを自ドメインと指定 -->
+        style-src 'self';  <!-- スタイルシートは自ドメインのみ -->
+        img-src 'self' https://x.gd;  <!-- 画像の取得元を制限 -->
+        font-src 'self';  <!-- フォントの取得元制限 -->
+        connect-src 'self';  <!-- 接続の制限 -->
+        object-src 'none';  <!-- オブジェクトのロード禁止 -->
+        upgrade-insecure-requests;  <!-- HTTPからHTTPSへの強制リダイレクト -->
+    ">
+
+    <!-- サイトのセキュリティ強化 -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -28,7 +45,7 @@
     <footer>
         <p>© 2025 マイワールド All rights reserved.</p>
         <div class="footer-links">
-            <a href="https://x.com/coara_choco" target="_blank">Xのアカウント</a>
+            <a href="https://x.com/coara_choco" target="_blank" rel="noopener noreferrer">Xのアカウント</a>
         </div>
     </footer>
 </body>
