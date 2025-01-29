@@ -86,43 +86,7 @@
             event.preventDefault();
         });
 
-        // デベロッパーツール対策 (iframe では実行しない)
-        if (window.self === window.top) { 
-            (function() {
-                var devtools = /./;
-                devtools.toString = function() {
-                    window.location.href = 'https://www.google.com'; // もし開いたらgoogleに飛ばす
-                };
-                console.log(devtools);
-            })();
-        }
-
-        // XSS監視: URLやパラメータに不正な文字列が含まれていないかチェック
-        if (window.self === window.top) {
-            window.addEventListener('DOMContentLoaded', (event) => {
-                const checkXSS = () => {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    for (let param of urlParams) {
-                        const value = param[1];
-                        if (/</.test(value) || />/.test(value) || /script/.test(value)) {
-                            window.location.href = 'https://www.google.com'; // 不正な文字列を検出した場合
-                        }
-                    }
-                };
-                checkXSS();
-            });
-        }
-
-        // 外部ドメイン監視 (iframe 内では監視を無効化)
-        if (window.self === window.top) {
-            const originalOpen = XMLHttpRequest.prototype.open;
-            XMLHttpRequest.prototype.open = function(method, url) {
-                if (url && !url.startsWith(window.location.origin)) {
-                    window.location.href = 'https://www.google.com'; // 外部ドメインにアクセスしようとした場合
-                }
-                originalOpen.apply(this, arguments);
-            };
-        }
+        // デベロッパーツール対策、XSS監視、外部ドメイン監視を無効化
     </script>
 </body>
 </html>
