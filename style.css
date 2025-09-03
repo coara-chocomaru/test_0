@@ -8,7 +8,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Header部分のエフェクト */
 header {
     background-color: #ffb6c1;
     padding: 20px 0;
@@ -17,7 +16,7 @@ header {
 h1 {
     font-size: 3em;
     color: #ff69b4;
-    animation: fadeIn 2s ease-out;  /* フェードインアニメーション */
+    animation: fadeIn 2s ease-out;
 }
 
 .main-content {
@@ -30,17 +29,16 @@ h1 {
     position: relative;
 }
 
-/* 画像のスタイル */
 .character-img {
     width: 150px;
     height: auto;
     border-radius: 50%;
     transition: transform 0.3s, box-shadow 0.3s;
-    object-fit: cover; /* 画像の切り抜きを適切に調整 */
+    object-fit: cover;
     position: relative;
 }
 
-/* 透明なオーバーレイを追加 */
+
 .character-img-overlay {
     position: absolute;
     top: 0;
@@ -48,13 +46,12 @@ h1 {
     right: 0;
     bottom: 0;
     background-color: transparent;
-    pointer-events: all;  /* 画像部分への操作を無効化 */
+    pointer-events: all; 
 }
 
-/* 画像のホバーエフェクト */
 .character-img:hover {
-    transform: scale(1.1);  /* 画像が少し大きくなる */
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);  /* ふわっと浮かび上がる */
+    transform: scale(1.1); 
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6); 
 }
 
 .character-text {
@@ -62,7 +59,7 @@ h1 {
     margin-top: 10px;
     color: #ff69b4;
     opacity: 0;
-    animation: fadeInText 2s forwards; /* フェードイン */
+    animation: fadeInText 2s forwards; 
 }
 
 @keyframes fadeInText {
@@ -76,7 +73,7 @@ h1 {
     }
 }
 
-/* 絵文字ハートのアニメーション強化 */
+
 .heart {
     position: absolute;
     top: 30px;
@@ -84,7 +81,7 @@ h1 {
     transform: translateX(-50%);
     font-size: 40px;
     animation: heartbeat 1.5s infinite, bounce 1.5s infinite;
-    visibility: hidden;  /* 初期状態で非表示 */
+    visibility: hidden; 
     display: inline-block;
     font-family: 'Arial', sans-serif;
 }
@@ -107,7 +104,6 @@ h1 {
     }
 }
 
-/* ボタンのエフェクト */
 button {
     background-color: #ff69b4;
     color: white;
@@ -121,15 +117,14 @@ button {
 
 button:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);  /* ホバー時のエフェクト */
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.8); 
 }
 
 button:active {
-    transform: scale(1.05);  /* クリック時のエフェクト */
+    transform: scale(1.05);  
     box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
 }
 
-/* フッター */
 footer {
     background-color: #ffb6c1;
     padding: 10px;
