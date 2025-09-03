@@ -22,7 +22,6 @@
     <script src="script.js" defer></script>
 
     <style>
-        /* 右クリック禁止 */
         body {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -73,44 +72,42 @@
     </footer>
 
     <script>
-        // 右クリック禁止
         document.addEventListener('contextmenu', function(event) {
             event.preventDefault();
         });
 
-        // 画像ドラッグ無効
         document.querySelector('.character-img').addEventListener('dragstart', function(event) {
             event.preventDefault();
         });
 
-        // デベロッパーツール対策
+    
         (function() {
             var devtools = /./;
             devtools.toString = function() {
-                window.location.href = 'https://www.google.com'; // もし開いたらgoogleに飛ばす
+                window.location.href = 'https://www.google.com';
             };
             console.log(devtools);
         })();
 
-        // XSS監視: URLやパラメータに不正な文字列が含まれていないかチェック
+        
         window.addEventListener('DOMContentLoaded', (event) => {
             const checkXSS = () => {
                 const urlParams = new URLSearchParams(window.location.search);
                 for (let param of urlParams) {
                     const value = param[1];
                     if (/</.test(value) || />/.test(value) || /script/.test(value)) {
-                        window.location.href = 'https://www.google.com'; // 不正な文字列を検出した場合
+                        window.location.href = 'https://www.google.com';
                     }
                 }
             };
             checkXSS();
         });
 
-        // 外部ドメイン監視
+    
         const originalOpen = XMLHttpRequest.prototype.open;
         XMLHttpRequest.prototype.open = function(method, url) {
             if (url && !url.startsWith(window.location.origin)) {
-                window.location.href = 'https://www.google.com'; // 外部ドメインにアクセスしようとした場合
+                window.location.href = 'https://www.google.com';
             }
             originalOpen.apply(this, arguments);
         };
