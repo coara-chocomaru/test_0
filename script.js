@@ -6,7 +6,7 @@
     let _0xaaaa = false;
     let _0xbbbb = 0;
 
-    // 時間帯ごとにセリフを変更
+    
     function _0x12ab34() {
         const _0xcdeff = new Date().getHours();
         if (_0xcdeff < 12) {
@@ -18,28 +18,28 @@
         }
     }
 
-    // ボタンがクリックされた時の処理
+    
     _0x7f8a9b.addEventListener("click", function() {
         if (!_0xaaaa) {
             _0xaaaa = true;
             _0xbbbb++;
-            _0x4d5e6f.style.visibility = "hidden"; // ハートを非表示
+            _0x4d5e6f.style.visibility = "hidden";
             _0x1a2b3c.textContent = "くるくる回ってるよ〜！";
-            _0x0d0e0f.classList.add("animate");  // 回転アニメーションを追加
+            _0x0d0e0f.classList.add("animate");
 
             setTimeout(() => {
-                _0x0d0e0f.classList.remove("animate");  // 回転アニメーションを削除
+                _0x0d0e0f.classList.remove("animate");
                 _0x1a2b3c.textContent = "終わったよ！";
                 _0xaaaa = false;
 
                 if (_0xbbbb > 3) {
-                    _0x4d5e6f.style.visibility = "visible"; // ハートエフェクトを表示
+                    _0x4d5e6f.style.visibility = "visible"; 
                     _0x1a2b3c.textContent = "くるくる〜〜";
                 }
             }, 3000);
         }
     });
 
-    // 初回読み込み時に時間帯ごとのセリフを表示
+    
     _0x12ab34(); 
 })();
